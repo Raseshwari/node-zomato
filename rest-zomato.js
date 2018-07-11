@@ -30,10 +30,10 @@ const axios = require('axios');
  	return JSON.parse(loc);
  };
 
- setCityLocation("new jersey");
- const loc = getCityLocation();
+ var getEstablishments = (city) => {
+ 	setCityLocation(city);
+ 	const loc = getCityLocation();
 
- var getEstablishments = () => {
  	var options = {
  		url : `https://developers.zomato.com/api/v2.1/establishments?lat=${loc.lat}&lon=${loc.lng}`,
  		headers : iniHeaders
@@ -50,7 +50,10 @@ const axios = require('axios');
  	request(options, (callback));
  };
 
- var getCuisines = () => {
+ var getCuisines = (city) => {
+ 	setCityLocation(city);
+ 	const loc = getCityLocation();
+
  	var options = {
  		url : `https://developers.zomato.com/api/v2.1/cuisines?lat=${loc.lat}&lon=${loc.lng}`,
  		headers : iniHeaders
@@ -67,7 +70,10 @@ const axios = require('axios');
  	request(options, (callback));	
  };
 
- var getCategories = () => {
+ var getCategories = (city) => {
+ 	setCityLocation(city);
+ 	const loc = getCityLocation();
+
  	var options = {
  		url : `https://developers.zomato.com/api/v2.1/categories`,
  		headers : iniHeaders
@@ -85,7 +91,10 @@ const axios = require('axios');
  };
 
 
- var getNearBy = () => {
+ var getNearBy = (city) => {
+ 	setCityLocation(city);
+ 	const loc = getCityLocation();
+
  	var options = {
  		url : `https://developers.zomato.com/api/v2.1/geocode?lat=${loc.lat}&lon=${loc.lng}`,
  		headers : iniHeaders
@@ -101,6 +110,27 @@ const axios = require('axios');
 
  	request(options, (callback));	
  };
+
+ var getRestaurant = () => {
+ 	setCityLocation("mumbai");
+ 	const loc = getCityLocation();
+
+ 	var options = {
+ 		url : `https://developers.zomato.com/api/v2.1/search?lat=${loc.lat}&lon=${loc.lng}&count=10&cuisines=3%2C25&establishment_type=1%2C23&category=13%2C6`,
+ 		headers : iniHeaders
+ 	};
+
+ 	function callback(error, response, body) {
+ 	  if (!error && response.statusCode == 200) {
+ 	   	fs.writeFileSync('rest-search.json',body, {spaces: 2});
+ 	  }else{
+ 	  	console.log("Unable to find nearby restaurants");
+ 	  }
+ 	}
+
+ 	request(options, (callback));
+ };
+
 
  var fetchListCategories = () => {
  	var cats = fs.readFileSync('rest-categories.json');
@@ -126,10 +156,23 @@ const axios = require('axios');
  	});
  };
 
- getEstablishments();
- getCuisines();
- getCategories();
- fetchListCategories();
- fetchListCuisines();
- fetchEstablishments();
- getNearBy();
+ var fetchNearBy = () => {
+ 	var nearby = fs.readFileSync('rest-nearby.json');
+ 	var info = JSON.parse(nearby)
+ 	info.nearby_restaurants.forEach(function(key){
+ 		console.log(key.restaurant.name);
+ 	});
+ };
+
+ getRestaurant();
+ 
+ module.exports = {
+ 	getEstablishments,
+ 	getCuisines,
+ 	getCategories,
+ 	getNearBy,
+ 	fetchListCategories,
+ 	fetchListCuisines,
+ 	fetchEstablishments,
+ 	fetchNearBy
+ }
