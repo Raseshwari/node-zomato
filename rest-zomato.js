@@ -111,14 +111,24 @@ const axios = require('axios');
  	request(options, (callback));	
  };
 
- var getRestaurant = () => {
- 	setCityLocation("mumbai");
+ var getRestaurant = (searchParams) => {
+ 	
+ 	setCityLocation(searchParams.city);
+ 	
  	const loc = getCityLocation();
+
+ 	var search = {
+ 		cuisine: searchParams.cuisine,
+ 		estab: searchParams.estab,
+ 		category: searchParams.category
+ 	};
 
  	var options = {
  		url : `https://developers.zomato.com/api/v2.1/search?lat=${loc.lat}&lon=${loc.lng}&count=10&cuisines=3%2C25&establishment_type=1%2C23&category=13%2C6`,
  		headers : iniHeaders
  	};
+
+ 	
 
  	function callback(error, response, body) {
  	  if (!error && response.statusCode == 200) {
@@ -130,7 +140,6 @@ const axios = require('axios');
 
  	request(options, (callback));
  };
-
 
  var fetchListCategories = () => {
  	var cats = fs.readFileSync('rest-categories.json');
@@ -164,13 +173,14 @@ const axios = require('axios');
  	});
  };
 
- getRestaurant();
+ 
  
  module.exports = {
  	getEstablishments,
  	getCuisines,
  	getCategories,
  	getNearBy,
+ 	getRestaurant,
  	fetchListCategories,
  	fetchListCuisines,
  	fetchEstablishments,
