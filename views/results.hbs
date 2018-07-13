@@ -28,7 +28,9 @@
             font-family: Sirin Stencil;
             font-weight: 400;
             font-size: 35px;
-            margin-left: 33%;
+            /*margin-left: 33%;*/
+            border-color:white;
+            border-style: double;
         }
         .form-group, .form-control {
             font-family: Sirin Stencil;
@@ -37,19 +39,37 @@
         }
 
         .panel-body{
-          margin-left: 33%
+          margin-left: 33%;
+        }
+
+        .container{
+          width: 50%;
+          /*margin-top: 5%;*/
         }
         body{
           color: white;
         }
-
+        .headings{
+          font-family: "Sirin Stencil";
+          font-weight: 400;
+          font-size: 30px;
+        }
 
 </style>
 </head>
 <body class="display">
 	
+  <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Node-Zomato</a>
+            </div>
+        </div>
+    </nav>
+
+  <div class="container">
 	<div class="panel panel-default">
-	  <div class="panel-heading">NearBy Restaurants</div>
+	  <div class="headings">NearBy Restaurants</div>
 	</div>
 
 	<div class="panel panel-default">
@@ -91,6 +111,6 @@
 	<div class="panel panel-default">
   		<div class="panel-heading">{{rest_names9}}</div>
 	</div>
-
+</div>
 </body>
 </html>
