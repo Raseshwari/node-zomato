@@ -41,7 +41,19 @@ app.post('/search', (req,res) => {
 		city: req.body.city
 	}; 
 	zomato.getRestaurant(searchParams);
-	res.render('results.hbs');
+	var rest_names = zomato.fetchListRestaurants();
+	res.render('results.hbs', {
+		rest_names0: rest_names[0],
+		rest_names1: rest_names[1],
+		rest_names2: rest_names[2],
+		rest_names3: rest_names[3],
+		rest_names4: rest_names[4],
+		rest_names5: rest_names[5],
+		rest_names6: rest_names[6],
+		rest_names7: rest_names[7],
+		rest_names8: rest_names[8],
+		rest_names9: rest_names[9]
+	});
 })
 
 //binding app to machine

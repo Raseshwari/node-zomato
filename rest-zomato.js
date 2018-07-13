@@ -117,28 +117,38 @@ const axios = require('axios');
  	
  	const loc = getCityLocation();
 
- 	var search = {
- 		cuisine: searchParams.cuisine,
- 		estab: searchParams.estab,
- 		category: searchParams.category
- 	};
+ 	// var cuisine_id = fetchCuisineId(searchParams.cuisine);
+ 	// var estab_id = fetchEstabId(searchParams.estab);
+ 	// var category_id = fetchCatId(searchParams.category);
+ 	// console.log(loc.lat, loc.lng, cuisine_id, estab_id,category_id);
 
  	var options = {
- 		url : `https://developers.zomato.com/api/v2.1/search?lat=${loc.lat}&lon=${loc.lng}&count=10&cuisines=3%2C25&establishment_type=1%2C23&category=13%2C6`,
+ 		//url : `https://developers.zomato.com/api/v2.1/search?lat=${loc.lat}&lon=${loc.lng}&cuisine=3`,
+ 		url: `https://developers.zomato.com/api/v2.1/search?count=10&lat=${loc.lat}&lon=${loc.lng}&cuisines=3&establishment_type=1%2C23&category=13%2C6`,
  		headers : iniHeaders
  	};
 
- 	
-
  	function callback(error, response, body) {
  	  if (!error && response.statusCode == 200) {
- 	   	fs.writeFileSync('rest-search.json',body, {spaces: 2});
+ 	   	fs.writeFileSync('rest-searchby.json',body, {spaces: 2});
  	  }else{
  	  	console.log("Unable to find nearby restaurants");
  	  }
  	}
 
  	request(options, (callback));
+ };
+
+ var fetchListRestaurants = () => {
+ 	var rests = fs.readFileSync('rest-searchby.json');
+ 	var info = JSON.parse(rests);
+ 	var rest_names = [];
+ 	//console.log(info.restaurants[0].restaurant.name);
+ 	info.restaurants.forEach(function(key){
+ 		rest_names.push(key.restaurant.name);
+ 		//console.log(key.restaurant.name);
+ 	});
+ 	return rest_names;
  };
 
  var fetchListCategories = () => {
@@ -149,13 +159,31 @@ const axios = require('axios');
  	});
  };
 
+ var fetchCatId = ((category) => {
+ 	console.log(category);
+ 	var categories = fs.readFileSync('rest-categories.json');
+ 	var info = JSON.parse(categories)
+ 	var obj = info.categories.find(o => o.categories.name === category);
+ 	return obj.categories.id;
+ });
+
  var fetchListCuisines = () => {
  	var cuisines = fs.readFileSync('rest-cuisines.json');
  	var info = JSON.parse(cuisines)
  	info.cuisines.forEach(function(key){
- 		console.log(key.cuisine.cuisine_name);
+ 			console.log(key.cuisine.cuisine_name);
  	});
- }
+ };
+
+ var fetchCuisineId = ((cuisine) => {
+ 	console.log(cuisine);
+ 	var cuisines = fs.readFileSync('rest-cuisines.json');
+ 	var info = JSON.parse(cuisines)
+ 	var obj = info.cuisines.find(o => o.cuisine.cuisine_name === cuisine);
+ 	return obj.cuisine.cuisine_id;
+ });
+
+
 
  var fetchEstablishments = () => {
  	var estabs = fs.readFileSync('rest-estab.json');
@@ -165,6 +193,14 @@ const axios = require('axios');
  	});
  };
 
+ var fetchEstabId = ((estab) => {
+ 	console.log(estab);
+ 	var estabs = fs.readFileSync('rest-estab.json');
+ 	var info = JSON.parse(estabs)
+ 	var obj = info.establishments.find(o => o.establishment.name === estab);
+ 	return obj.establishment.id;
+ });
+
  var fetchNearBy = () => {
  	var nearby = fs.readFileSync('rest-nearby.json');
  	var info = JSON.parse(nearby)
@@ -172,8 +208,6 @@ const axios = require('axios');
  		console.log(key.restaurant.name);
  	});
  };
-
- 
  
  module.exports = {
  	getEstablishments,
@@ -184,5 +218,6 @@ const axios = require('axios');
  	fetchListCategories,
  	fetchListCuisines,
  	fetchEstablishments,
- 	fetchNearBy
+ 	fetchNearBy,
+ 	fetchListRestaurants
  }
