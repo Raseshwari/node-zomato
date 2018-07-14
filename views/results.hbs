@@ -47,7 +47,7 @@
           /*margin-top: 5%;*/
         }
         body{
-          color: white;
+          font-style: "Cabin Sketch"
         }
         .headings{
           font-family: "Sirin Stencil";
@@ -55,6 +55,35 @@
           font-size: 30px;
         }
 
+    .accordion {
+    font-family: Sirin Stencil;
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 20px;
+    transition: 0.4s;
+    
+}
+
+.active, .accordion:hover {
+    background-color: #ccc; 
+}
+
+.panel {
+  font-family: Sirin Stencil;
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+.h3style{
+  font-style: "Cabin Sketch"
+}
 </style>
 </head>
 <body class="display">
@@ -68,49 +97,146 @@
     </nav>
 
   <div class="container">
-	<div class="panel panel-default">
-	  <div class="headings">NearBy Restaurants</div>
-	</div>
+    <div class="row">
+      <div class= "col">
+        <button class=" h3style accordion ">{{rest_name0.name}}</button>
+        <div class="panel">
+          <p>Cuisine: {{rest_name0.cuisine}}</p>
+          <p>Rating: {{rest_name0.rating}}</p>
+          <p>Cost for two: {{rest_name0.cost2}}</p>
+          <p>Locality: {{rest_name0.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names1.name}}</button>
+        <div class="panel">
+          <p>Cuisine: {{rest_names1.cuisine}}</p>
+          <p>Rating: {{rest_names1.rating}}</p>
+          <p>Cost for 2: {{rest_names1.cost2}}</p>
+          <p>Locality: {{rest_names1.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names2.name}}</button>
+        <div class="panel">
+           <p>Cuisine: {{rest_names2.cuisine}}</p>
+          <p>Rating: {{rest_names2.rating}}</p>
+          <p>Cost for two: {{rest_names2.cost2}}</p>
+          <p>Locality: {{rest_names2.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names3.name}}</button>
+        <div class="panel">
+           <p>Cuisine: {{rest_names3.cuisine}}</p>
+          <p>Rating: {{rest_names3.rating}}</p>
+          <p>Cost for two: {{rest_names3.cost2}}</p>
+          <p>Locality: {{rest_names3.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names4.name}}</button>
+        <div class="panel">
+           <p>Cuisine: {{rest_names4.cuisine}}</p>
+          <p>Rating: {{rest_names4.rating}}</p>
+          <p>Cost for two: {{rest_names4.cost2}}</p>
+          <p>Locality: {{rest_names4.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names5.name}}</button>
+        <div class="panel">
+           <p>Cuisine: {{rest_names5.cuisine}}</p>
+          <p>Rating: {{rest_names5.rating}}</p>
+          <p>Cost for two: {{rest_names5.cost2}}</p>
+          <p>Locality: {{rest_names5.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names6.name}}</button>
+        <div class="panel">
+           <p>Cuisine: {{rest_names6.cuisine}}</p>
+          <p>Rating: {{rest_names6.rating}}</p>
+          <p>Cost for two: {{rest_names6.cost2}}</p>
+          <p>Locality: {{rest_names6.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names7.name}}</button>
+        <div class="panel">
+           <p>Cuisine: {{rest_names7.cuisine}}</p>
+          <p>Rating: {{rest_names7.rating}}</p>
+          <p>Cost for two: {{rest_names7.cost2}}</p>
+          <p>Locality: {{rest_names7.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names8.name}}</button>
+        <div class="panel">
+           <p>Cuisine: {{rest_names8.cuisine}}</p>
+          <p>Rating: {{rest_names8.rating}}</p>
+          <p>Cost for two: {{rest_names8.cost2}}</p>
+          <p>Locality: {{rest_names8.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class= "col">
+        <button class="accordion">{{rest_names9.name}}</button>
+        <div class="panel">
+           <p>Cuisine: {{rest_names9.cuisine}}</p>
+          <p>Rating: {{rest_names9.rating}}</p>
+          <p>Cost for two: {{rest_names9.cost2}}</p>
+          <p>Locality: {{rest_names9.locality}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+      </div>
+    </div>    
+  </div>
 
-	<div class="panel panel-default">
-	  <div class="panel-heading">{{rest_names0}}</div>
-	</div>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
 
-	<div class="panel panel-default">
-	  <div class="panel-heading">{{rest_names1}}</div>
-	</div>
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
+}
+</script>
 
-	<div class="panel panel-default">
-  		<div class="panel-heading">{{rest_names2}}</div>
-	</div>
-
-	<div class="panel panel-default">
-  		<div class="panel-heading">{{rest_names3}}</div>
-	</div>
-
-	<div class="panel panel-default">
-  		<div class="panel-heading">{{rest_names4}}</div>
-	</div>
-
-	<div class="panel panel-default">
-  		<div class="panel-heading">{{rest_names5}}</div>
-	</div>
-
-	<div class="panel panel-default">
-  		<div class="panel-heading">{{rest_names6}}</div>
-	</div>
-
-	<div class="panel panel-default">
-  		<div class="panel-heading">{{rest_names7}}</div>
-	</div>
-
-	<div class="panel panel-default">
-  		<div class="panel-heading">{{rest_names8}}</div>
-	</div>
-
-	<div class="panel panel-default">
-  		<div class="panel-heading">{{rest_names9}}</div>
-	</div>
-</div>
 </body>
 </html>

@@ -143,13 +143,22 @@ const axios = require('axios');
  	var rests = fs.readFileSync('rest-searchby.json');
  	var info = JSON.parse(rests);
  	var rest_names = [];
+ 	var i = 0;
  	//console.log(info.restaurants[0].restaurant.name);
  	info.restaurants.forEach(function(key){
- 		rest_names.push(key.restaurant.name);
- 		//console.log(key.restaurant.name);
+ 		rest_names[i]= {
+ 			name: key.restaurant.name,
+ 			locality: key.restaurant.location.locality,
+ 			cuisine: key.restaurant.cuisines,
+ 			cost2: key.restaurant.average_cost_for_two,
+ 			rating: key.restaurant.user_rating.aggregate_rating};
+ 			i++;
  	});
+ 	//console.log(rest_names);
  	return rest_names;
  };
+
+ fetchListRestaurants();
 
  var fetchListCategories = () => {
  	var cats = fs.readFileSync('rest-categories.json');
